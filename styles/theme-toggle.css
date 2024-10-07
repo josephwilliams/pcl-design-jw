@@ -1,0 +1,40 @@
+.theme-toggle {
+  display: block;
+  width: 32px;
+  height: 32px;
+  overflow: hidden;
+  transition: all 400ms ease;
+  border-radius: 4px;
+  padding: 0;
+  border: 0;
+  cursor: pointer;
+  outline: none;
+}
+
+.theme-toggle.dawn {
+  background: #f5f6f8;
+}
+
+.theme-toggle.dusk {
+  background: #3c3549;
+}
+
+.theme-toggle .dusk &:hover {
+  background: lighten(#3c3549, 20%);
+}
+
+.theme-toggle.dusk .toggle-glyph {
+  fill: #f5f6f8;
+  transform: rotate(180deg);
+}
+
+.toggle-glyph {
+  text-align: center;
+  transition: all 400ms ease;
+  width: 24px;
+  margin: auto;
+}
+
+.toggle-glyph svg {
+  display: block;
+}
