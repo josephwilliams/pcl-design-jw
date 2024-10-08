@@ -2,6 +2,8 @@ import NavBar from "@/components/ui/nav";
 import PlaceholderImage from "@/assets/placeholder.png";
 import Image from "next/image";
 import { Button } from "@/components/ui/button";
+import FadeInComponent from "@/components/fade-in";
+import TableComponent from "@/components/table-component";
 
 export default function Home() {
   return (
@@ -46,6 +48,10 @@ export default function Home() {
           <h2 className="text-[20px] leading-[30px]">3. Harum, reiciendis!</h2>
         </div>
       </div>
+      <div style={{ height: "100vh" }} />
+      <FadeInComponent />
+      <div style={{ height: "100vh" }} />
+      <TableComponent />
     </main>
   );
 }

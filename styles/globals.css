@@ -33,3 +33,17 @@ body {
     --radius: 0.5rem;
   }
 }
+
+.gradient-text {
+  background: linear-gradient(
+    90deg,
+    #ff7e5f 0%,
+    #5fdcff 50%,
+    #feb47b 50%,
+    #a07bfe 100%
+  );
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  text-fill-color: transparent;
+}
