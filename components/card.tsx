@@ -18,7 +18,7 @@ function Card({
     >
       <div className="flex justify-between items-center">
         <div className="p-[15px]">{icon}</div>
-        <h2 className="text-xl font-bold">Points Card</h2>
+        <h2 className="text-xl font-bold text-white">Points Card</h2>
       </div>
       <div className="text-gray-500 mb-[15px]">
         Lorem ipsum is a default filler test that is used by{" "}
