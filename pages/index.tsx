@@ -1,51 +1,118 @@
-import NavBar from "@/components/ui/nav";
-import PlaceholderImage from "@/assets/placeholder.png";
-import Image from "next/image";
-import { Button } from "@/components/ui/button";
+// import NavBar from "@/components/ui/nav";
+// import PlaceholderImage from "@/assets/placeholder.png";
+// import Image from "next/image";
+// import { Button } from "@/components/ui/button";
+
+import Card from "@/components/card";
+import FloatCards from "@/components/float-card";
+import Footer from "@/components/footer";
+import TableComponent from "@/components/table-component";
+import classNames from "classnames";
+import { useMediaQuery } from "react-responsive";
+
+const cards = [
+  {
+    title: "Points Card",
+    text: "Lorem ipsum is a default filler test that is used by anyone who doesn’t need focus on text.",
+    icon: (
+      <svg
+        width="24"
+        height="21"
+        viewBox="0 0 24 21"
+        fill="none"
+        xmlns="http://www.w3.org/2000/svg"
+      >
+        <path
+          d="M12.5078 3.35156C11.8828 3.9375 11.5312 4.67969 11.2188 5.34375C11.0625 5.69531 10.9453 6.04688 10.7891 6.32031L10.75 6.47656C10.3984 7.33594 10.0469 8.19531 9.22656 9.01562C8.17188 10.0312 7 10.6953 6.02344 11.1641C5.94531 11.2422 5.82812 11.2812 5.71094 11.3203C4.85156 11.7891 4.1875 12.1016 3.5625 12.6094C2.97656 13.0781 2.625 13.7031 2.625 14.5625V18.625H10.125C12.8594 18.625 15.5938 17.6094 17.7031 16.0469C19.7344 14.5234 21.375 12.3359 21.375 9.875C21.375 8 20.6328 6.16406 19.5391 4.79688C18.4453 3.46875 16.8828 2.375 15.125 2.375C14.0312 2.375 13.1719 2.72656 12.5078 3.35156ZM10.125 20.5H2.625H0.75V18.625V14.5625C0.75 13.0781 1.41406 11.9062 2.39062 11.125C3.17188 10.5391 3.99219 10.1094 4.85156 9.67969C5.94531 9.13281 7 8.58594 7.89844 7.6875C8.44531 7.14062 8.67969 6.59375 9.07031 5.61719C9.1875 5.30469 9.34375 4.95312 9.5 4.5625C9.8125 3.89844 10.3203 2.84375 11.2188 1.98438C12.2734 1.00781 13.6016 0.5 15.125 0.5C17.6641 0.5 19.6953 2.02344 20.9844 3.625C22.3125 5.30469 23.25 7.53125 23.25 9.875C23.25 13.1562 21.0625 15.8516 18.7969 17.5703C16.4531 19.3281 13.2891 20.5 10.125 20.5ZM12.6641 6.75C12.7812 6.51562 12.8594 6.28125 12.9375 6.08594C13.2109 5.46094 13.4844 5.03125 13.7969 4.71875C14.0703 4.44531 14.4609 4.28906 15.125 4.28906C16.1016 4.28906 17.1953 4.91406 18.0547 6.00781C18.9141 7.0625 19.5 8.50781 19.5 9.91406C19.5 11.4766 18.3672 13.1953 16.5703 14.5625C14.7734 15.8906 12.3906 16.75 10.125 16.75H4.5V14.5625C4.5 14.2109 4.57812 14.0547 4.73438 13.9375C4.96875 13.7422 5.32031 13.5469 5.94531 13.3125H5.98438C7.11719 12.8047 8.75781 12.1406 10.5547 10.3438C11.6484 9.21094 12.2344 7.84375 12.6641 6.75ZM17 9.25C17 8.58594 16.4141 8 15.75 8C15.0469 8 14.5 8.58594 14.5 9.25C14.5 9.95312 15.0469 10.5 15.75 10.5C16.4141 10.5 17 9.95312 17 9.25Z"
+          fill="#FAE24C"
+        />
+      </svg>
+    ),
+    anyoneColor: "#6FD572",
+    hoverBgColor: "#3c3539",
+  },
+  {
+    title: "Points Card",
+    text: "Lorem ipsum is a default filler test that is used by anyone who doesn’t need focus on text.",
+    icon: (
+      <svg
+        width="41"
+        height="40"
+        viewBox="0 0 41 40"
+        fill="none"
+        xmlns="http://www.w3.org/2000/svg"
+      >
+        <path
+          d="M21.1743 13.3516C20.5493 13.9375 20.1978 14.6797 19.8853 15.3438C19.729 15.6953 19.6118 16.0469 19.4556 16.3203L19.4165 16.4766C19.0649 17.3359 18.7134 18.1953 17.8931 19.0156C16.8384 20.0312 15.6665 20.6953 14.6899 21.1641C14.6118 21.2422 14.4946 21.2812 14.3774 21.3203C13.5181 21.7891 12.854 22.1016 12.229 22.6094C11.6431 23.0781 11.2915 23.7031 11.2915 24.5625V28.625H18.7915C21.5259 28.625 24.2603 27.6094 26.3696 26.0469C28.4009 24.5234 30.0415 22.3359 30.0415 19.875C30.0415 18 29.2993 16.1641 28.2056 14.7969C27.1118 13.4688 25.5493 12.375 23.7915 12.375C22.6978 12.375 21.8384 12.7266 21.1743 13.3516ZM18.7915 30.5H11.2915H9.4165V28.625V24.5625C9.4165 23.0781 10.0806 21.9062 11.0571 21.125C11.8384 20.5391 12.6587 20.1094 13.5181 19.6797C14.6118 19.1328 15.6665 18.5859 16.5649 17.6875C17.1118 17.1406 17.3462 16.5938 17.7368 15.6172C17.854 15.3047 18.0103 14.9531 18.1665 14.5625C18.479 13.8984 18.9868 12.8438 19.8853 11.9844C20.9399 11.0078 22.2681 10.5 23.7915 10.5C26.3306 10.5 28.3618 12.0234 29.6509 13.625C30.979 15.3047 31.9165 17.5312 31.9165 19.875C31.9165 23.1562 29.729 25.8516 27.4634 27.5703C25.1196 29.3281 21.9556 30.5 18.7915 30.5ZM21.3306 16.75C21.4478 16.5156 21.5259 16.2812 21.604 16.0859C21.8774 15.4609 22.1509 15.0312 22.4634 14.7188C22.7368 14.4453 23.1274 14.2891 23.7915 14.2891C24.7681 14.2891 25.8618 14.9141 26.7212 16.0078C27.5806 17.0625 28.1665 18.5078 28.1665 19.9141C28.1665 21.4766 27.0337 23.1953 25.2368 24.5625C23.4399 25.8906 21.0571 26.75 18.7915 26.75H13.1665V24.5625C13.1665 24.2109 13.2446 24.0547 13.4009 23.9375C13.6353 23.7422 13.9868 23.5469 14.6118 23.3125H14.6509C15.7837 22.8047 17.4243 22.1406 19.2212 20.3438C20.3149 19.2109 20.9009 17.8438 21.3306 16.75ZM25.6665 19.25C25.6665 18.5859 25.0806 18 24.4165 18C23.7134 18 23.1665 18.5859 23.1665 19.25C23.1665 19.9531 23.7134 20.5 24.4165 20.5C25.0806 20.5 25.6665 19.9531 25.6665 19.25Z"
+          fill="#FF886D"
+        />
+      </svg>
+    ),
+    anyoneColor: "#FF886D",
+    hoverBgColor: "#3c3c36",
+  },
+  {
+    title: "Points Card",
+    text: "Lorem ipsum is a default filler test that is used by anyone who doesn’t need focus on text.",
+    icon: (
+      <svg
+        width="41"
+        height="40"
+        viewBox="0 0 41 40"
+        fill="none"
+        xmlns="http://www.w3.org/2000/svg"
+      >
+        <path
+          d="M20.8413 13.3516C20.2163 13.9375 19.8647 14.6797 19.5522 15.3438C19.396 15.6953 19.2788 16.0469 19.1226 16.3203L19.0835 16.4766C18.7319 17.3359 18.3804 18.1953 17.5601 19.0156C16.5054 20.0312 15.3335 20.6953 14.3569 21.1641C14.2788 21.2422 14.1616 21.2812 14.0444 21.3203C13.1851 21.7891 12.521 22.1016 11.896 22.6094C11.3101 23.0781 10.9585 23.7031 10.9585 24.5625V28.625H18.4585C21.1929 28.625 23.9272 27.6094 26.0366 26.0469C28.0679 24.5234 29.7085 22.3359 29.7085 19.875C29.7085 18 28.9663 16.1641 27.8726 14.7969C26.7788 13.4688 25.2163 12.375 23.4585 12.375C22.3647 12.375 21.5054 12.7266 20.8413 13.3516ZM18.4585 30.5H10.9585H9.0835V28.625V24.5625C9.0835 23.0781 9.74756 21.9062 10.7241 21.125C11.5054 20.5391 12.3257 20.1094 13.1851 19.6797C14.2788 19.1328 15.3335 18.5859 16.2319 17.6875C16.7788 17.1406 17.0132 16.5938 17.4038 15.6172C17.521 15.3047 17.6772 14.9531 17.8335 14.5625C18.146 13.8984 18.6538 12.8438 19.5522 11.9844C20.6069 11.0078 21.9351 10.5 23.4585 10.5C25.9976 10.5 28.0288 12.0234 29.3179 13.625C30.646 15.3047 31.5835 17.5312 31.5835 19.875C31.5835 23.1562 29.396 25.8516 27.1304 27.5703C24.7866 29.3281 21.6226 30.5 18.4585 30.5ZM20.9976 16.75C21.1147 16.5156 21.1929 16.2812 21.271 16.0859C21.5444 15.4609 21.8179 15.0312 22.1304 14.7188C22.4038 14.4453 22.7944 14.2891 23.4585 14.2891C24.4351 14.2891 25.5288 14.9141 26.3882 16.0078C27.2476 17.0625 27.8335 18.5078 27.8335 19.9141C27.8335 21.4766 26.7007 23.1953 24.9038 24.5625C23.1069 25.8906 20.7241 26.75 18.4585 26.75H12.8335V24.5625C12.8335 24.2109 12.9116 24.0547 13.0679 23.9375C13.3022 23.7422 13.6538 23.5469 14.2788 23.3125H14.3179C15.4507 22.8047 17.0913 22.1406 18.8882 20.3438C19.9819 19.2109 20.5679 17.8438 20.9976 16.75ZM25.3335 19.25C25.3335 18.5859 24.7476 18 24.0835 18C23.3804 18 22.8335 18.5859 22.8335 19.25C22.8335 19.9531 23.3804 20.5 24.0835 20.5C24.7476 20.5 25.3335 19.9531 25.3335 19.25Z"
+          fill="#FAE24C"
+        />
+      </svg>
+    ),
+    anyoneColor: "#6FD572",
+    hoverBgColor: "#3c3539",
+  },
+];
 
 export default function Home() {
+  const isMobile = useMediaQuery({ query: "(max-width: 600px)" });
+
   return (
-    <main className="mx-auto min-w-[100vw] min-h-[100vh]">
-      <NavBar />
+    <main className="mx-auto min-w-[100vw] min-h-[100vh] p-[40px]">
+      <div
+        className={classNames(
+          "flex flex-1 margin-center gap-[40px]",
+          isMobile ? "flex-col" : "flex-row"
+        )}
+      >
+        <div className="flex flex-col gap-[15px] max-w-[800px]">
+          <h1 className="text-white font-semibold text-[41px] title-text tracking-wide">
+            Active Achievements
+          </h1>
 
-      <div className="w-full bg-[#fcebc8]">
-        <div className="bg-[#fcebc8] px-[40px] py-[40px] pb-[40px] overflow-hidden w-full relative text-[#37371F] flex gap-5 flex-wrap items-center justify-center mx-auto">
-          <div className="flex flex-col gap-5 items-center">
-            <Image
-              src={PlaceholderImage}
-              alt="Splash"
-              className="w-[300px] h-[300px]"
-              width={300}
-              height={300}
-            />
-          </div>
-          <div className="flex flex-col gap-3">
-            <h1 className="text-[30px] leading-[33px] title-font">
-              Lorem ipsum
-            </h1>
-            <h1 className="text-[30px] leading-[33px] title-font text-[#8f5656]">
-              amet consectetur adipisicing elit.
-            </h1>
-            <div className="max-w-[210px] flex flex-col gap-3 mt-[10px]">
-              <Button>Get Started</Button>
+          {isMobile && (
+            <div className="w-full">
+              <FloatCards />
             </div>
+          )}
+
+          <div className="flex gap-3 overflow-x-scroll">
+            {cards.map((card, index) => (
+              <Card key={index} {...card} />
+            ))}
+          </div>
+          <div className="flex flex-col">
+            <TableComponent />
           </div>
         </div>
+
+        {!isMobile && (
+          <div className="w-[350px] sticky top-16 min-h-[600px]">
+            <FloatCards />
+          </div>
+        )}
       </div>
 
-      <div className="flex flex-col gap-3 items-start justify-start mx-auto p-[40px] py-[60px] max-w-[850px]">
-        <h1 className="text-[30px] leading-[40px] title-font">How it works</h1>
-        <div className="flex flex-col gap-3">
-          <h2 className="text-[20px] leading-[30px]">
-            1. Nobis eius commodi velit quasi libero unde dolorum vitae et.
-          </h2>
-          <h2 className="text-[20px] leading-[30px]">
-            2. Laudantium modi perspiciatis voluptatum natus recusandae iste
-            sunt eos inventore.
-          </h2>
-          <h2 className="text-[20px] leading-[30px]">3. Harum, reiciendis!</h2>
-        </div>
-      </div>
+      <Footer />
     </main>
   );
 }

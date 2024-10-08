@@ -31,7 +31,14 @@ const Dashboard = () => {
       <div className="flex">
         <Sidebar />
         <div className="flex-1 flex">
-          <div className="min-w-[1000px] max-w-[1000px]">
+          <div className="min-w-[1000px] max-w-[1000px] w-[200vh]">
+            <TitleAndGraph />
+            <TitleAndGraph />
+            <TitleAndGraph />
+            <TitleAndGraph />
+            <TitleAndGraph />
+            <TitleAndGraph />
+            <TitleAndGraph />
             <TitleAndGraph />
           </div>
           <StickySquare />
