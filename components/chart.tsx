@@ -90,6 +90,7 @@ const LineChart = () => {
   return (
     <div>
       <ReactApexChart
+        // @ts-expect-error - ApexCharts expects a specific type for options
         options={options}
         series={series}
         type="line"
