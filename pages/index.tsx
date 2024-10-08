@@ -2,6 +2,7 @@ import NavBar from "@/components/ui/nav";
 import PlaceholderImage from "@/assets/placeholder.png";
 import Image from "next/image";
 import { Button } from "@/components/ui/button";
+import FadeInComponent from "@/components/fade-in";
 
 export default function Home() {
   return (
@@ -15,6 +16,8 @@ export default function Home() {
               src={PlaceholderImage}
               alt="Splash"
               className="w-[300px] h-[300px]"
+              width={300}
+              height={300}
             />
           </div>
           <div className="flex flex-col gap-3">
@@ -44,6 +47,9 @@ export default function Home() {
           <h2 className="text-[20px] leading-[30px]">3. Harum, reiciendis!</h2>
         </div>
       </div>
+      <div style={{ height: "100vh" }} />
+      <FadeInComponent />
+      <div style={{ height: "100vh" }} />
     </main>
   );
 }
