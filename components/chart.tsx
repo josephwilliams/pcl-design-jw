@@ -1,103 +1,124 @@
-import React, { useState } from "react";
-import ReactApexChart from "react-apexcharts";
+import dynamic from "next/dynamic";
+import { twMerge } from "tailwind-merge";
 
-const LineChart = () => {
-  const [series] = useState([
+const ReactApexChart = dynamic(() => import("react-apexcharts"), {
+  ssr: false,
+});
+
+const reduceDataPoints = (data: number[], maxDataPoints: number) => {
+  if (data.length <= maxDataPoints) return data;
+
+  const step = Math.ceil(data.length / maxDataPoints);
+  return data.filter((_, index) => index % step === 0);
+};
+
+const RevenueChart = ({
+  className,
+  isMobile,
+}: {
+  className?: string;
+  isMobile?: boolean;
+}) => {
+  const categories = [
+    "Jan",
+    "Feb",
+    "Mar",
+    "Apr",
+    "May",
+    "Jun",
+    "Jul",
+    "Aug",
+    "Sep",
+    "Oct",
+    "Nov",
+    "Dec",
+  ];
+  const maxDataPoints = isMobile ? 20 : 50;
+
+  const series = [
     {
       name: "Revenue",
-      data: [
-        150000000, 250000000, 300000000, 350000000, 450000000, 500000000,
-        700000000, 650000000, 800000000, 900000000, 950000000, 1000000000,
-      ],
+      data: reduceDataPoints(
+        [
+          150000000, 250000000, 300000000, 350000000, 450000000, 500000000,
+          700000000, 650000000, 800000000, 900000000, 950000000, 1000000000,
+        ],
+        maxDataPoints
+      ),
     },
-  ]);
+  ];
 
   const options = {
     chart: {
-      type: "line",
-      zoom: { enabled: false },
-      toolbar: { show: false },
-    },
-    stroke: {
-      curve: "smooth",
-      width: 3,
-      colors: ["#00E396"], // Adjust the line color to make it pop
-      dashArray: 0,
-      shadow: {
-        enabled: true,
-        color: "#00E396",
-        top: 10,
-        left: 0,
-        blur: 10,
-        opacity: 0.8,
-      },
-    },
-    dataLabels: {
-      enabled: false,
-    },
-    fill: {
-      type: "gradient",
-      gradient: {
-        shade: "dark",
-        type: "vertical",
-        gradientToColors: ["#00E396"], // Match with the line color
-        stops: [0, 100],
-        opacityFrom: 0.5,
-        opacityTo: 0,
+      type: "area",
+      height: 300,
+      toolbar: {
+        show: false,
       },
     },
     xaxis: {
-      categories: [
-        "Jan",
-        "Feb",
-        "Mar",
-        "Apr",
-        "May",
-        "Jun",
-        "Jul",
-        "Aug",
-        "Sep",
-        "Oct",
-        "Nov",
-        "Dec",
-      ],
+      categories,
+      labels: {
+        rotate: -45,
+      },
     },
     yaxis: {
       labels: {
-        formatter: (value: number) => {
-          if (value >= 1000000000) return (value / 1000000000).toFixed(1) + "b";
-          if (value >= 1000000) return (value / 1000000).toFixed(1) + "m";
-          return value;
+        formatter: (val: number) => {
+          if (val >= 1000000000) return (val / 1000000000).toFixed(1) + "b";
+          if (val >= 1000000) return (val / 1000000).toFixed(1) + "m";
+          return val.toFixed(0); // Removing trailing 00s
         },
       },
       min: 100000000,
       max: 1000000000,
     },
-    tooltip: {
-      y: {
-        formatter: (value: number) => {
-          if (value >= 1000000000) return (value / 1000000000).toFixed(1) + "b";
-          if (value >= 1000000) return (value / 1000000).toFixed(1) + "m";
-          return value;
-        },
+    stroke: {
+      curve: "smooth",
+      width: 4, // Thick line
+      colors: ["#00E396"], // Green line color
+    },
+    fill: {
+      type: "gradient",
+      gradient: {
+        shadeIntensity: 1,
+        type: "vertical",
+        gradientToColors: ["#ABEBC6"], // Lighter green gradient fill
+        opacityFrom: 0.5,
+        opacityTo: 0,
+        stops: [0, 100],
       },
     },
+    tooltip: {
+      shared: true,
+      intersect: false,
+    },
     grid: {
-      borderColor: "#f1f1f1",
+      show: false, // Removing horizontal grid lines
+    },
+    markers: {
+      size: 0, // No dot points
+    },
+    dataLabels: {
+      enabled: false, // Hide values on top of points
+    },
+    legend: {
+      position: "top",
+      horizontalAlign: "right",
     },
   };
 
   return (
-    <div>
+    <div className={twMerge("bg-white rounded-lg p-6 shadow-md", className)}>
       <ReactApexChart
-        // @ts-expect-error - ApexCharts expects a specific type for options
+        // @ts-expect-error - ApexChart expects a specific type of data
         options={options}
         series={series}
-        type="line"
-        height={350}
+        type="area"
+        height={300}
       />
     </div>
   );
 };
 
-export default LineChart;
+export default RevenueChart;

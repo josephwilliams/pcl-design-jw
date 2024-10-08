@@ -7,6 +7,7 @@ import { useEffect } from "react";
 import Modal from "react-modal";
 
 import "react-tooltip/dist/react-tooltip.css";
+import "@fontsource/inter-tight/400.css";
 
 export default function App({ Component, pageProps }: AppProps) {
   useEffect(() => {
